@@ -42,6 +42,8 @@ server.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
+
+
 mongoose.connect(process.env.DATABASE_URL)
   .then(() => {
     console.log("Database connected successfully");
@@ -64,6 +66,3 @@ process.on("unhandledRejection", (err) => {
   console.error("UNHANDLED REJECTION:");
   console.error(err);
 });
-
-n failed:", error.message);
-  });
