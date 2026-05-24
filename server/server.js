@@ -12,7 +12,7 @@ server.use(express.json());
 server.use(cookieParser());
 
 server.use(cors({
-  origin: "http://localhost:3000", 
+  origin: true,
   credentials: true,
 }));
 
