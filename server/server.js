@@ -42,16 +42,28 @@ server.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-
-
 mongoose.connect(process.env.DATABASE_URL)
   .then(() => {
     console.log("Database connected successfully");
 
     server.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((error) => {
-    console.error("Database connection failed:", error.message);
+    console.error("FULL ERROR:");
+    console.error(error);
+  });
+
+process.on("uncaughtException", (err) => {
+  console.error("UNCAUGHT EXCEPTION:");
+  console.error(err);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.error("UNHANDLED REJECTION:");
+  console.error(err);
+});
+
+n failed:", error.message);
   });
