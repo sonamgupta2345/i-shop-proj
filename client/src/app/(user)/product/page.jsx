@@ -1,0 +1,38 @@
+import { getProducts } from "@/api/api-call";
+import BestsellerSection from "@/components/user/BestsellerSection";
+
+export default async function Page({ searchParams }) {
+  const search_promise = await searchParams;
+  const brand_slug = search_promise.brand_slug || null;
+  const color_slug = search_promise.color_slug || null;
+  const min_price = search_promise.min_price || null;
+  const max_price = search_promise.max_price || null;
+  const sort = search_promise.sort || null;
+  const product_response = await getProducts({ status: true, brand_slug, color_slug ,min_price ,max_price});
+
+  return (
+   <section className="bg-gray-100 py-10 px-5">
+  <div className="w-full mx-auto">
+    <h2 className="text-lg font-semibold mb-6 uppercase">
+      Best Seller In This Category
+    </h2>
+
+    {/* 👇 ADD THIS GRID */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      
+      {product_response?.data?.map((prod) => {
+        return(
+
+       <BestsellerSection
+          key={prod._id}
+          product={prod}
+          imageBaseUrl={product_response?.meta?.imageBaseUrl + prod.thumbnail}
+        />
+         ) 
+      })}
+
+    </div>
+  </div>
+</section>
+  );
+}
