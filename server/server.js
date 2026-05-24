@@ -53,7 +53,7 @@ mongoose.connect(process.env.DATABASE_URL)
     });
   })
   .catch((error) => {
-    console.error("Database connection failed:");
+    console.error("FULL ERROR:");
     console.error(error);
   });
 
